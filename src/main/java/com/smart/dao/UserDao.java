@@ -18,10 +18,10 @@ public class UserDao {
             " t_user WHERE user_name =? and password =? ";
 
     private final static String UPDATE_LOGIN_INFO_SQL = " UPDATE t_user SET " +
-            " last_visit =?,last_ip =?, credits =?, where user_id=? ";
+            " last_visit =?, last_ip =?, credits =? where user_id =? ";
 
     private final static String FIND_USER_SQL = " SELECT user_id,user_name,credits " +
-            " FROM t_user  WHERE user_name =?";
+            " FROM t_user  WHERE user_name =? ";
 
     public int getMatchCount(String userNmae, String password) {
         return jdbcTemplate.<Integer>queryForObject(MATCH_COUNT_SQL, new Object[]{userNmae, password}, Integer.class);
@@ -41,6 +41,8 @@ public class UserDao {
     }
 
     public void updateLoginInfo(User user) {
+        System.out.printf(UPDATE_LOGIN_INFO_SQL, new Object[] {user.getLastVisit(),
+                user.getLastIp(), user.getCredits(), user.getUserId()});
         jdbcTemplate.update(UPDATE_LOGIN_INFO_SQL, new Object[] {user.getLastVisit(),
                 user.getLastIp(), user.getCredits(), user.getUserId()});
     }
