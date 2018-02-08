@@ -21,14 +21,15 @@ public class UserServiceText extends AbstractTransactionalTestNGSpringContextTes
     @Test
     public void hasMatchUser() {
         boolean b1 = userService.hasMatchUser("admin","123456");
-    boolean b2 = userService.hasMatchUser("admin","11111");
+        boolean b2 = userService.hasMatchUser("admin","11111");
         Assert.assertTrue(b1);
-        Assert.assertTrue(b2);
+        Assert.assertTrue(!b2);
 }
 
     @Test
     public void findUserByUserName() {
         User user = userService.findUserByUserName("admin");
+
         Assert.assertEquals(user.getUserName(), "admin");
     }
 
